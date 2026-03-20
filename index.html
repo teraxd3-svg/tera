@@ -1,186 +1,92 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8">
-<title>C2D</title>
-<style>
-    * { margin: 0; padding: 0; }
-    body {
-        font-family: "Courier New", monospace;
-        color: #00ffea;
-        overflow: hidden;
-        background: black;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Benim Index Sayfam</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-color: #f8fafc;
+            --accent-color: #38bdf8;
+            --hover-color: #0ea5e9;
+        }
 
-    /* 🇹🇷 Arka plan Türk Bayrağı */
-    body::before {
-        content: "";
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-image: url("TR-Turkey-Flag-icon.png");
-        background-size: cover;
-        background-position: center;
-        filter: brightness(0.35) blur(1px);
-        z-index: -2;
-    }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
 
-    /* Matrix yağmur */
-    canvas {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-        z-index: -1;
-    }
+        .container {
+            width: 90%;
+            max-width: 600px;
+            text-align: center;
+        }
 
-    /* 🔰 LOGO */
-    .logo {
-        position: absolute;
-        top: 70px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 150px;
-        opacity: 0.95;
-        filter: drop-shadow(0 0 15px #00ffee);
-        z-index: 10;
-    }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: var(--accent-color);
+        }
 
-    /* Orta yazı */
-    .center {
-        position: absolute;
-        top: 55%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        text-align: center;
-        text-shadow: 0 0 12px #00ffee;
-        z-index: 10;
-    }
+        p {
+            opacity: 0.8;
+            margin-bottom: 30px;
+        }
 
-    h1 {
-        font-size: 60px;
-    }
+        .links {
+            display: grid;
+            gap: 15px;
+        }
 
-    h3 {
-        margin-top: 10px;
-        font-size: 22px;
-    }
+        .link-card {
+            background: var(--card-bg);
+            padding: 15px 25px;
+            border-radius: 12px;
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
 
-    /* Instagram alanı */
-    .instagram {
-        position: fixed;
-        bottom: 20px;
-        width: 100%;
-        text-align: center;
-        z-index: 10;
-    }
+        .link-card:hover {
+            transform: translateY(-3px);
+            background: var(--accent-color);
+            color: #fff;
+            box-shadow: 0 10px 20px rgba(56, 189, 248, 0.2);
+        }
 
-    .instagram span {
-        display: block;
-        font-size: 14px;
-        margin-bottom: 5px;
-        text-shadow: 0 0 8px #00ffee;
-    }
-
-    .instagram a {
-        color: #00ffea;
-        text-decoration: none;
-        font-size: 16px;
-        text-shadow: 0 0 10px #00ffee;
-        transition: 0.3s;
-    }
-
-    .instagram a:hover {
-        color: #ffffff;
-        text-shadow: 0 0 15px #ffffff;
-    }
-</style>
+        .footer {
+            margin-top: 40px;
+            font-size: 0.8rem;
+            opacity: 0.5;
+        }
+    </style>
 </head>
 <body>
 
-<!-- 🎧 Müzik -->
-<audio id="music" src="music.mp3" loop></audio>
+    <div class="container">
+        <h1>Hoş Geldiniz</h1>
+        <p>Ben Tera Hakkımdakılere Bağlantılara Tıklayarak Ulaşabilirsiniz.</p>
 
-<!-- Matrix -->
-<canvas id="matrix"></canvas>
+        <div class="links">
+            <a href="https://wa.me/212778308150" class="link-card" target="_blank">Whatsapp</a>
+            <a href="https://t.me/JaegerTeam" class="link-card" target="_blank">Telegram</a>
+            <a href="https://www.instagram.com/c2dteraxd?igsh=eTNnaXh1ZmFud3k2" class="link-card" target="_blank">Sosyal Medya</a>
+        </div>
 
-<!-- 🔰 LOGO -->
-<img src="tr-turkey-flag-icon.png" alt=PALA " " class="logo">
-
-<div class="center">
-    <h1>C2D</h1>
-    <h3>• TERA • OZİ</h3>
-</div>
-
-<!-- Instagram -->
-<div class="instagram">
-    <span>igsh</span>
-    <a href="" target="_blank">
-        
-    </a>
-</div>
-
-<script>
-    // Müzik başlatıcı
-    document.addEventListener("click", function () {
-        const m = document.getElementById("music");
-        m.volume = 0.5;
-        m.play();
-    });
-
-    // MATRIX EFFECT
-    const canvas = document.getElementById("matrix");
-    const ctx = canvas.getContext("2d");
-
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    const chars = "01ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    const fontSize = 16;
-    const columns = Math.floor(canvas.width / fontSize);
-    const drops = Array(columns).fill(1);
-
-    function draw() {
-        ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-        ctx.fillStyle = "#00ffea";
-        ctx.font = fontSize + "px monospace";
-
-        for (let i = 0; i < drops.length; i++) {
-            const text = chars[Math.floor(Math.random() * chars.length)];
-            ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-
-            if (drops[i] * fontSize > canvas.height && Math.random() > 0.97) {
-                drops[i] = 0;
-            }
-            drops[i]++;
-        }
-    }
-
-    setInterval(draw, 35);
-
-    window.onresize = () => {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    };
-</script>
+        <div class="footer">
+            &copy; 2026 Tüm Hakları Saklıdır.
+        </div>
+    </div>
 
 </body>
-</html> 
-<style>  
-/* 📸 Profil Fotoğrafı */
-.profil {
-    position: absolute;
-    top: 70px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 160px;
-    border-radius: 8px; /* köşeler hafif yuvarlak */
-    filter: grayscale(100%) drop-shadow(0 0 15px #00ffee);
-    z-index: 10;
-}
+</html>
