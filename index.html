@@ -3,88 +3,131 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Benim Index Sayfam</title>
+    <title>TERAONLINE</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        :root {
-            --bg-color: #0f172a;
-            --card-bg: #1e293b;
-            --text-color: #f8fafc;
-            --accent-color: #38bdf8;
-            --hover-color: #0ea5e9;
-        }
-
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            margin: 0;
+            background-color: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
+            height: 100vh;
+            margin: 0;
         }
 
         .container {
-            width: 90%;
-            max-width: 600px;
+            background: #0d0d0d;
+            border: 1px solid #222;
+            border-radius: 25px;
+            padding: 30px;
             text-align: center;
+            width: 350px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+        }
+
+        .kali-dragon {
+            width: 100px;
+            margin-bottom: 10px;
+            filter: brightness(0) invert(1); /* Logoyu beyaza çevirir */
         }
 
         h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            color: var(--accent-color);
+            font-size: 28px;
+            letter-spacing: 4px;
+            margin: 10px 0;
+            font-weight: bold;
         }
 
-        p {
-            opacity: 0.8;
-            margin-bottom: 30px;
+        .description {
+            font-size: 14px;
+            color: #aaa;
+            margin-bottom: 25px;
         }
 
-        .links {
-            display: grid;
-            gap: 15px;
+        .profile-box {
+            background: #161616;
+            border-radius: 15px;
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-align: left;
+            margin-bottom: 25px;
         }
 
-        .link-card {
-            background: var(--card-bg);
-            padding: 15px 25px;
-            border-radius: 12px;
-            text-decoration: none;
-            color: var(--text-color);
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        .profile-img {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            object-fit: cover;
         }
 
-        .link-card:hover {
-            transform: translateY(-3px);
-            background: var(--accent-color);
+        .profile-info b {
+            display: block;
+            font-size: 16px;
+        }
+
+        .profile-info span {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 10px;
+        }
+
+        .social-icons a {
             color: #fff;
-            box-shadow: 0 10px 20px rgba(56, 189, 248, 0.2);
+            font-size: 30px;
+            text-decoration: none;
+            transition: 0.3s;
         }
 
-        .footer {
-            margin-top: 40px;
-            font-size: 0.8rem;
-            opacity: 0.5;
+        /* Üzerine gelince renk değişimi */
+        .fa-telegram:hover { color: #0088cc; }
+        .fa-instagram:hover { color: #e1306c; }
+        .fa-whatsapp:hover { color: #25d366; }
+
+        .views {
+            margin-top: 20px;
+            color: #444;
+            font-size: 12px;
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>Hoş Geldiniz</h1>
-        <p>Ben Tera Hakkımdakılere Bağlantılara Tıklayarak Ulaşabilirsiniz.</p>
+        <img src="https://www.kali.org/images/kali-logo.svg" class="kali-dragon" alt="Kali">
 
-        <div class="links">
-            <a href="https://wa.me/212778308150" class="link-card" target="_blank">Whatsapp</a>
-            <a href="https://t.me/JaegerTeam" class="link-card" target="_blank">Telegram</a>
-            <a href="https://www.instagram.com/c2dteraxd?igsh=eTNnaXh1ZmFud3k2" class="link-card" target="_blank">Sosyal Medya</a>
+        <h1>⚔️ TERA ⚔️</h1>
+        
+        <p class="description">
+            Cyber security and ethical hacker<br>
+            software and computer engineer
+        </p>
+
+        <div class="profile-box">
+            <img src="https://i.pinimg.com/originals/e4/df/67/e4df67820067664687588e7b99c2794c.jpg" class="profile-img">
+            <div class="profile-info">
+                <b>c2dtera 🔥 FLEX</b>
+                <span>last seen unknown</span>
+            </div>
         </div>
 
-        <div class="footer">
-            &copy; 2026 Tüm Hakları Saklıdır.
+        <div class="social-icons">
+            <a href="https://t.me/teraxxl" target="_blank"><i class="fab fa-telegram"></i></a>
+            <a href="https://www.instagram.com/c2dtera?igsh=eTNnaXh1ZmFud3k2" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://wa.me/2250705006356" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        </div>
+
+        <div class="views">
+            <i class="fas fa-eye"></i> 212
         </div>
     </div>
 
