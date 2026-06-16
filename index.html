@@ -2,134 +2,96 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TERAONLINE</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="referrer" content="no-referrer">
+    
+    <title>Hacked By TERA</title>
+    <link rel="icon" type="image/png" href="https://i.hizliresim.com/9x1hxd2.png">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+
     <style>
-        body {
-            background-color: #000;
-            color: #fff;
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body, html { height: 100%; background-color: #000000; color: #ffffff; font-family: 'Rajdhani', sans-serif; overflow: hidden; user-select: none; cursor: crosshair; }
+
+        .scanlines {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
+                        linear-gradient(90deg, rgba(57, 255, 20, 0.06), rgba(0, 255, 0, 0.02), rgba(57, 255, 20, 0.06));
+            background-size: 100% 3px, 3px 100%; z-index: 10; pointer-events: none; animation: flicker 0.15s infinite;
         }
 
-        .container {
-            background: #0d0d0d;
-            border: 1px solid #222;
-            border-radius: 25px;
-            padding: 30px;
-            text-align: center;
-            width: 350px;
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
-        }
+        @keyframes flicker { 0% { opacity: 0.95; } 50% { opacity: 0.85; } 100% { opacity: 0.95; } }
 
-        .kali-dragon {
-            width: 100px;
-            margin-bottom: 10px;
-            filter: brightness(0) invert(1); /* Logoyu beyaza çevirir */
-        }
+        .bg-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; z-index: 1; opacity: 0; transition: transform 0.1s linear; filter: contrast(1.3) brightness(0.3) hue-rotate(90deg); }
+        
+        #networkCanvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; }
+        .vignette-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at center, transparent 10%, #000000 90%); z-index: 3; pointer-events: none; box-shadow: inset 0 0 100px rgba(57, 255, 20, 0.25); }
 
-        h1 {
-            font-size: 28px;
-            letter-spacing: 4px;
-            margin: 10px 0;
-            font-weight: bold;
-        }
+        .container { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; text-align: center; position: relative; padding: 20px; pointer-events: none; z-index: 5; }
 
-        .description {
-            font-size: 14px;
-            color: #aaa;
-            margin-bottom: 25px;
-        }
+        .hacked-title { font-family: 'Orbitron', sans-serif; font-size: 4.5rem; font-weight: 900; text-transform: uppercase; letter-spacing: 8px; color: #39FF14; text-shadow: 0 0 20px rgba(57, 255, 20, 0.8), 0 0 40px rgba(57, 255, 20, 0.6); animation: titleGlitch 2s infinite ease-in-out; margin-bottom: 25px; background: rgba(0,0,0,0.6); padding: 15px 35px; border-radius: 20px; border: 1px solid rgba(57, 255, 20, 0.5); }
+        
+        .hacked-sub { font-size: 1.6rem; letter-spacing: 3px; color: #fff; background: rgba(0,0,0,0.5); padding: 12px 30px; border-radius: 50px; margin-top: 15px; border-left: 2px solid #39FF14; border-right: 2px solid #39FF14; display: inline-flex; align-items: center; gap: 12px; }
+        
+        .telegram-link { color: #39FF14; font-weight: bold; font-size: 1.8rem; text-decoration: none; pointer-events: auto; }
+        
+        .slider-container { position: relative; width: 100%; max-width: 1200px; height: 180px; display: flex; justify-content: center; align-items: center; margin-top: 20px; }
 
-        .profile-box {
-            background: #161616;
-            border-radius: 15px;
-            padding: 12px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-align: left;
-            margin-bottom: 25px;
-        }
+        .slide { position: absolute; opacity: 0; transition: all 0.7s cubic-bezier(0.23, 1, 0.32, 1); font-family: 'Orbitron', sans-serif; font-size: 2.4rem; color: #fff; text-transform: uppercase; letter-spacing: 4px; pointer-events: none; text-shadow: 0 0 10px #39FF14; background: rgba(0, 0, 0, 0.5); padding: 20px 35px; border-radius: 30px; border: 1px solid #39FF14; }
+        .slide.active { opacity: 1; animation: textGlitch 0.4s cubic-bezier(.25, .46, .45, .94) both infinite; }
+        .slide span { color: #39FF14; display: block; font-size: 3rem; margin-top: 10px; }
+        
+        .footer-text { font-size: 1.2rem; margin-top: 40px; color: #39FF14; font-family: 'Orbitron', monospace; text-shadow: 0 0 10px #39FF14; }
 
-        .profile-img {
-            width: 55px;
-            height: 55px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-
-        .profile-info b {
-            display: block;
-            font-size: 16px;
-        }
-
-        .profile-info span {
-            font-size: 12px;
-            color: #666;
-        }
-
-        .social-icons {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 10px;
-        }
-
-        .social-icons a {
-            color: #fff;
-            font-size: 30px;
-            text-decoration: none;
-            transition: 0.3s;
-        }
-
-        /* Üzerine gelince renk değişimi */
-        .fa-telegram:hover { color: #0088cc; }
-        .fa-instagram:hover { color: #e1306c; }
-        .fa-whatsapp:hover { color: #25d366; }
-
-        .views {
-            margin-top: 20px;
-            color: #444;
-            font-size: 12px;
-        }
+        @keyframes titleGlitch { 0%, 100% { transform: skew(0deg); } 96% { transform: skew(3deg); } 98% { transform: skew(-2deg); } }
+        @keyframes textGlitch { 0% { transform: translate(0); } 20% { transform: translate(-2px, 2px); } 100% { transform: translate(0); } }
     </style>
 </head>
 <body>
+    <div class="scanlines"></div>
+    <div class="bg-layer"></div>
+    <canvas id="networkCanvas"></canvas>
+    <div class="vignette-overlay"></div>
 
     <div class="container">
-        <img src="https://www.kali.org/images/kali-logo.svg" class="kali-dragon" alt="Kali">
-
-        <h1>⚔️ TERA ⚔️</h1>
+        <div class="hacked-title">HACKED BY<br>TERA</div>
+        <div class="hacked-sub">
+            <a href="https://t.me/allahinizinfazediyor" target="_blank" class="telegram-link">t.me/allahinizinfazediyor</a>
+        </div>
         
-        <p class="description">
-            Cyber security and ethical hacker<br>
-            software and computer engineer
-        </p>
-
-        <div class="profile-box">
-            <img src="https://i.pinimg.com/originals/e4/df/67/e4df67820067664687588e7b99c2794c.jpg" class="profile-img">
-            <div class="profile-info">
-                <b>c2dtera 🔥 FLEX</b>
-                <span>last seen unknown</span>
-            </div>
+        <div class="slider-container">
+            <div class="slide active">SİBER UZAYIN <span>HAKİMLERİ</span></div>
+            <div class="slide">ADALET MÜLKÜN <span>TEMELİDİR</span></div>
+            <div class="slide">SİSTEM <span>DEFTEDILDI</span></div>
         </div>
-
-        <div class="social-icons">
-            <a href="https://t.me/teraxxl" target="_blank"><i class="fab fa-telegram"></i></a>
-            <a href="https://www.instagram.com/c2dtera?igsh=eTNnaXh1ZmFud3k2" target="_blank"><i class="fab fa-instagram"></i></a>
-            <a href="https://wa.me/2250705006356" target="_blank"><i class="fab fa-whatsapp"></i></a>
-        </div>
-
-        <div class="views">
-            <i class="fas fa-eye"></i> 212
-        </div>
+        <div class="footer-text">Herkesin Sisteminde Bir Açık Vardır.</div>
     </div>
 
+    <script>
+        const canvas = document.getElementById('networkCanvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+        let particlesArray = [];
+        class Particle {
+            constructor(x, y, directionX, directionY, size) { this.x = x; this.y = y; this.directionX = directionX; this.directionY = directionY; this.size = size; }
+            draw() { ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fillStyle = '#39FF14'; ctx.fill(); }
+            update() { if (this.x > canvas.width || this.x < 0) this.directionX = -this.directionX; if (this.y > canvas.height || this.y < 0) this.directionY = -this.directionY; this.x += this.directionX; this.y += this.directionY; this.draw(); }
+        }
+        function init() { particlesArray = []; for(let i=0; i<100; i++) { particlesArray.push(new Particle(Math.random()*canvas.width, Math.random()*canvas.height, (Math.random()-0.5)*1, (Math.random()-0.5)*1, 2)); } }
+        function animate() { requestAnimationFrame(animate); ctx.clearRect(0,0,innerWidth,innerHeight); particlesArray.forEach(p => p.update()); }
+        window.addEventListener('resize', () => { canvas.width = innerWidth; canvas.height = innerHeight; init(); });
+        init(); animate();
+        
+        const slides = document.querySelectorAll('.slide');
+        let currentSlide = 0;
+        setInterval(() => {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }, 4000);
+    </script>
 </body>
-</html>
+                                                                      </html>
+    
