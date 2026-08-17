@@ -3,10 +3,14 @@
 <head>
 <meta charset="UTF-8" />
 <title>Hacked by Tera</title>
+
 <style>
   * {
-    margin: 0; padding: 0; box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
   }
+
   html, body {
     height: 100%;
     overflow: hidden;
@@ -19,7 +23,8 @@
 
   .particle {
     position: fixed;
-    top: 0; left: 0;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100vh;
     pointer-events: none;
@@ -33,6 +38,7 @@
     height: 3px;
     border-radius: 50%;
     background: #FF0000;
+
     box-shadow:
       571px 173px #FF0000,
       1732px 143px #FF0000,
@@ -137,37 +143,47 @@
   }
 
   @keyframes animStar {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(-2000px); }
+    0% {
+      transform: translateY(0);
+    }
+
+    100% {
+      transform: translateY(-2000px);
+    }
   }
+
   .ball--one {
     animation: animStar 150s linear infinite;
   }
 
   .overlay {
     position: relative;
-    width: 100%; height: 100%;
+    width: 100%;
+    height: 100%;
     background-color: rgba(0, 0, 0, 0.45);
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    padding-top: 100px; /* BİR TIK ALTA İNDİ */
+    padding-top: 100px;
     z-index: 20;
     text-align: center;
     gap: 15px;
   }
+
   .logo {
     max-width: 250px;
     margin-bottom: 10px;
     filter: drop-shadow(0 0 10px red);
   }
+
   h1 {
     font-size: 3rem;
     text-shadow: 0 0 10px red;
     margin-bottom: 0;
     line-height: 1.1;
   }
+
   .signature {
     font-size: 1.2rem;
     color: #f33;
@@ -192,16 +208,24 @@
     z-index: 30;
     transition: background-color 0.3s ease;
   }
+
   .music-button:hover {
     background-color: rgba(255, 0, 0, 1);
   }
 
   iframe {
-    width: 0; height: 0; border: none; opacity: 0; pointer-events: none;
-    position: fixed; bottom: 0; right: 0;
+    width: 1px;
+    height: 1px;
+    border: none;
+    opacity: 0;
+    pointer-events: none;
+    position: fixed;
+    bottom: 0;
+    right: 0;
   }
 </style>
 </head>
+
 <body>
 
   <div class="particle">
@@ -209,31 +233,66 @@
   </div>
 
   <div class="overlay">
-    <img class="logo" src="https://i.imgur.com/8CHWTBQ.png" alt="Kryzlo Logo" />
+    <img
+      class="logo"
+      src="https://i.imgur.com/8CHWTBQ.png"
+      alt="Kryzlo Logo"
+    />
+
     <h1>HACKED BY TERA</h1>
-    <div class="signature">- İstediğimiz Zaman, İstediğimiz Yerde -</div>
+
+    <div class="signature">
+      - İstediğimiz Zaman, İstediğimiz Yerde -
+    </div>
   </div>
 
-  <button class="music-button" id="musicBtn">Müziği Aç</button>
+  <button class="music-button" id="musicBtn">
+    Müziği Aç
+  </button>
 
-  <iframe id="musicPlayer" src="" allow="autoplay"></iframe>
+  <!-- YouTube oynatıcı -->
+  <iframe
+    id="musicPlayer"
+    src=""
+    allow="autoplay; encrypted-media"
+    allowfullscreen>
+  </iframe>
 
   <script>
-    const btn = document.getElementById('musicBtn');
-    const iframe = document.getElementById('musicPlayer');
+    const btn = document.getElementById("musicBtn");
+    const iframe = document.getElementById("musicPlayer");
+
     let playing = false;
 
-    btn.addEventListener('click', () => {
+    // YouTube video ID
+    const videoID = "C695hn4w3Rk";
+
+    btn.addEventListener("click", function () {
+
       if (!playing) {
-        iframe.src = "https://youtu.be/C695hn4w3Rk?si=1Jk07FJeiiwCq4bv";
+
+        // YouTube videosunu başlat
+        iframe.src =
+          "https://www.youtube.com/embed/" +
+          videoID +
+          "?autoplay=1&loop=1&playlist=" +
+          videoID;
+
         btn.textContent = "Müziği Kapat";
         playing = true;
+
       } else {
+
+        // Müziği durdur
         iframe.src = "";
+
         btn.textContent = "Müziği Aç";
         playing = false;
       }
+
     });
   </script>
+
 </body>
 </html>
+
