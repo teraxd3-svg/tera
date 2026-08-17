@@ -161,12 +161,15 @@
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.45);
+
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+
     padding-top: 100px;
     z-index: 20;
+
     text-align: center;
     gap: 15px;
   }
@@ -196,15 +199,21 @@
     position: fixed;
     bottom: 20px;
     right: 20px;
+
     background-color: rgba(255, 0, 0, 0.7);
     border: none;
+
     padding: 8px 12px;
+
     font-size: 14px;
     font-family: monospace;
     color: white;
+
     cursor: pointer;
     border-radius: 5px;
+
     box-shadow: 0 0 10px red;
+
     z-index: 30;
     transition: background-color 0.3s ease;
   }
@@ -213,15 +222,16 @@
     background-color: rgba(255, 0, 0, 1);
   }
 
-  iframe {
+  /* YouTube oynatıcı tamamen görünmez */
+  #musicPlayer {
+    position: fixed;
     width: 1px;
     height: 1px;
+    left: -100px;
+    bottom: -100px;
     border: none;
     opacity: 0;
     pointer-events: none;
-    position: fixed;
-    bottom: 0;
-    right: 0;
   }
 </style>
 </head>
@@ -233,6 +243,7 @@
   </div>
 
   <div class="overlay">
+
     <img
       class="logo"
       src="https://i.imgur.com/8CHWTBQ.png"
@@ -244,18 +255,19 @@
     <div class="signature">
       - İstediğimiz Zaman, İstediğimiz Yerde -
     </div>
+
   </div>
 
   <button class="music-button" id="musicBtn">
     Müziği Aç
   </button>
 
-  <!-- YouTube oynatıcı -->
+  <!-- Gizli YouTube oynatıcı -->
   <iframe
     id="musicPlayer"
     src=""
     allow="autoplay; encrypted-media"
-    allowfullscreen>
+    title="Music Player">
   </iframe>
 
   <script>
@@ -264,19 +276,17 @@
 
     let playing = false;
 
-    // YouTube video ID
+    // VERDİĞİN YOUTUBE MÜZİĞİ
     const videoID = "C695hn4w3Rk";
 
     btn.addEventListener("click", function () {
 
       if (!playing) {
 
-        // YouTube videosunu başlat
         iframe.src =
           "https://www.youtube.com/embed/" +
           videoID +
-          "?autoplay=1&loop=1&playlist=" +
-          videoID;
+          "?autoplay=1&playsinline=1&controls=0&rel=0";
 
         btn.textContent = "Müziği Kapat";
         playing = true;
@@ -288,6 +298,7 @@
 
         btn.textContent = "Müziği Aç";
         playing = false;
+
       }
 
     });
@@ -295,4 +306,3 @@
 
 </body>
 </html>
-
